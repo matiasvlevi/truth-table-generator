@@ -61,9 +61,11 @@ module.exports = function logicToCalc(str, values) {
     let v1 = '';
     let v2 = '';
     for (let s of signal) {
+      console.log(s.variable, c.i1)
       if (s.variable === c.i1) {
         i1 = s.value;
         v1 = s.variable;
+
       } else if (s.variable === c.i2) {
         i2 = s.value;
         v2 = s.variable;
@@ -77,8 +79,12 @@ module.exports = function logicToCalc(str, values) {
     console.log(toNum(newstr, signal) + ' = ' + result);
 
 
-    let regexStr = "" + v1 + "\\" + c.operation + v2 + "|" + v1 + "\\" + c.operation + "\\(" + v2 + "\\)";
+    let regexStr = "" + v1 + "\\" + c.operation + v2 + "|" +
+      v1 + "\\" + c.operation + "\\(" + v2 + "\\)" + "|" +
+      "\\(" + v1 + "\\)" + "\\" + c.operation + "\\(" + v2 + "\\)" + "|" +
+      "\\(" + v1 + "\\)" + "\\" + c.operation + v2;
     let reg = new RegExp(regexStr);
+    console.log(reg)
     while (newstr.indexOf(alpha[letterIndex]) !== -1) {
       if (letterIndex >= 26) {
         letterIndex = 0;
@@ -88,8 +94,7 @@ module.exports = function logicToCalc(str, values) {
     }
     newstr = newstr.replace(reg, alpha[letterIndex]);
 
-    // remove all ignored chars
-    newstr = removeIgnored(newstr, ignored);
+
 
     let val1replace = v1 + ':' + i1;
 
@@ -112,6 +117,8 @@ module.exports = function logicToCalc(str, values) {
     }
     oldvalues = newValues;
     signal = parseSignal(newValues);
+    // remove all ignored chars
+    newstr = removeIgnored(newstr, ignored);
     logic = strToLogic(newstr, operators);
 
     i++;

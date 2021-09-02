@@ -16,26 +16,23 @@ module.exports = function strToLogic(operation, operators) {
     }
 
     let isOperator = ifM(char, operators);
-    let isNotPresent = (signals.indexOf(char) === -1);
-
     let isMult = 0;
 
     if (isOperator) {
       let passed = 0;
       let input1 = operation[i - 1];
-      while (input1 === ')') {
+      while (input1 === ')' || input1 === '(') {
         input1 = operation[i - 1 - passed];
-        if (input1 === ')') {
-          passed--;
-        }
+
+        passed--;
+
       }
       passed = 0;
       let input2 = operation[i + 1];
-      while (input2 === '(') {
+      while (input2 === '(' || input2 === ')') {
         input2 = operation[i + 1 + passed];
-        if (input2 === '(') {
-          passed++;
-        }
+        passed++;
+
       }
 
       if (char === '*') {
@@ -67,5 +64,6 @@ module.exports = function strToLogic(operation, operators) {
     return b.priority - a.priority;
   });
 
+  console.log(logic)
   return logic;
 }

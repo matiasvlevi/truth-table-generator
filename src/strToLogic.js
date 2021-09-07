@@ -64,6 +64,6 @@ module.exports = function strToLogic(operation, operators) {
     return b.priority - a.priority;
   });
 
-  console.log(logic)
+  // console.log(logic)
   return logic;
 }

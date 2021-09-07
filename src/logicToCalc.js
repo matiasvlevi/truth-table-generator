@@ -61,7 +61,7 @@ module.exports = function logicToCalc(str, values) {
     let v1 = '';
     let v2 = '';
     for (let s of signal) {
-      console.log(s.variable, c.i1)
+      //console.log(s.variable, c.i1)
       if (s.variable === c.i1) {
         i1 = s.value;
         v1 = s.variable;
@@ -74,9 +74,9 @@ module.exports = function logicToCalc(str, values) {
     }
     result = binary(c.op(i1, i2));
 
-    console.log('')
-    console.log('Round ' + i)
-    console.log(toNum(newstr, signal) + ' = ' + result);
+    // console.log('')
+    // console.log('Round ' + i)
+    // console.log(toNum(newstr, signal) + ' = ' + result);
 
 
     let regexStr = "" + v1 + "\\" + c.operation + v2 + "|" +
@@ -84,7 +84,6 @@ module.exports = function logicToCalc(str, values) {
       "\\(" + v1 + "\\)" + "\\" + c.operation + "\\(" + v2 + "\\)" + "|" +
       "\\(" + v1 + "\\)" + "\\" + c.operation + v2;
     let reg = new RegExp(regexStr);
-    console.log(reg)
     while (newstr.indexOf(alpha[letterIndex]) !== -1) {
       if (letterIndex >= 26) {
         letterIndex = 0;

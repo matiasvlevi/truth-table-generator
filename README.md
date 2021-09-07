@@ -2,6 +2,11 @@
 
 Generate truth table for complex logic gate equations.
 
+### Requirements
+* Nodejs & npm
+
+<br/>
+
 Try:
 ```sh
 npm start "A*(B+C)"
